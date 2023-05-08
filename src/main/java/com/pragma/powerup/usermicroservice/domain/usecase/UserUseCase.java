@@ -13,6 +13,7 @@ public class UserUseCase implements IUserServicePort {
         this.userPersistencePort = userPersistencePort;
     }
 
+
     @Override
     public void saveUser(User user) {
         userPersistencePort.saveUser(user);
@@ -24,13 +25,23 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
-    public List<User> getAllProviders(int page) {
-        return userPersistencePort.getAllProviders(page);
+    public List<User> getAllOwners(int page) {
+        return userPersistencePort.getAllOwners(page);
     }
 
     @Override
-    public User getProvider(Long id) {
-        return userPersistencePort.getProvider(id);
+    public List<User> getAllEmployees(int page) {
+        return userPersistencePort.getAllEmployees(page);
+    }
+
+    @Override
+    public List<User> getAllClients(int page) {
+        return userPersistencePort.getAllClients(page);
+    }
+
+    @Override
+    public User getOwner(Long id) {
+        return userPersistencePort.getOwner(id);
     }
 
     @Override
@@ -41,5 +52,10 @@ public class UserUseCase implements IUserServicePort {
     @Override
     public User getClient(Long id) {
         return userPersistencePort.getClient(id);
+    }
+
+    @Override
+    public User getUser(Long id) {
+        return userPersistencePort.getUser(id);
     }
 }
