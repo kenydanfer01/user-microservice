@@ -7,8 +7,11 @@ import java.util.List;
 public interface IUserPersistencePort {
     void saveUser(User user);
     void deleteUser(User user);
-    List<User> getAllProviders(int page);
-    User getProvider(Long id);
+    List<User> getAllOwners(int page);
+    List<User> getAllEmployees(int page);
+    List<User> getAllClients(int page);
+    User getOwner(Long id);
     User getEmployee(Long id);
     User getClient(Long id);
+    User getUser(Long id);
 }
