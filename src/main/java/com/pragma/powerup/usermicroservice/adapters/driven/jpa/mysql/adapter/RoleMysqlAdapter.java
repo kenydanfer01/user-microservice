@@ -14,6 +14,7 @@ import java.util.List;
 public class RoleMysqlAdapter implements IRolePersistencePort {
     private final IRoleRepository roleRepository;
     private final IRoleEntityMapper roleEntityMapper;
+
     @Override
     public List<Role> getAllRoles() {
         List<RoleEntity> roleEntityList = roleRepository.findAll();
