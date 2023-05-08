@@ -1,10 +1,10 @@
 package com.pragma.powerup.usermicroservice.adapters.driving.http.handlers.impl;
 
 import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.request.UserRequestDto;
-import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.PersonResponseDto;
+import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.UserResponseDto;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.handlers.IUserHandler;
-import com.pragma.powerup.usermicroservice.adapters.driving.http.mapper.IPersonResponseMapper;
 import com.pragma.powerup.usermicroservice.adapters.driving.http.mapper.IUserRequestMapper;
+import com.pragma.powerup.usermicroservice.adapters.driving.http.mapper.IUserResponseMapper;
 import com.pragma.powerup.usermicroservice.domain.api.IUserServicePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,8 @@ public class UserHandlerImpl implements IUserHandler {
 
     private final IUserServicePort userServicePort;
     private final IUserRequestMapper userRequestMapper;
-    private final IPersonResponseMapper personResponseMapper;
+    private final IUserResponseMapper userResponseMapper;
+
 
     @Override
     public void saveUser(UserRequestDto userRequestDto) {
@@ -30,22 +31,37 @@ public class UserHandlerImpl implements IUserHandler {
     }
 
     @Override
-    public List<PersonResponseDto> getProvider(Integer page) {
-        return personResponseMapper.userListToPersonResponseList(userServicePort.getAllProviders(page));
+    public List<UserResponseDto> getAllOwners(Integer page) {
+        return userResponseMapper.toResponseList(userServicePort.getAllOwners(page));
     }
 
     @Override
-    public PersonResponseDto getProvider(Long id) {
-        return personResponseMapper.userToPersonResponse(userServicePort.getProvider(id));
+    public List<UserResponseDto> getAllEmployees(int page) {
+        return userResponseMapper.toResponseList(userServicePort.getAllEmployees(page));
     }
 
     @Override
-    public PersonResponseDto getEmployee(Long id) {
-        return personResponseMapper.userToPersonResponse(userServicePort.getEmployee(id));
+    public List<UserResponseDto> getAllClients(int page) {
+        return userResponseMapper.toResponseList(userServicePort.getAllClients(page));
     }
 
     @Override
-    public PersonResponseDto getClient(Long id) {
-        return personResponseMapper.userToPersonResponse(userServicePort.getClient(id));
+    public UserResponseDto getOwner(Long id) {
+        return userResponseMapper.toResponse(userServicePort.getOwner(id));
+    }
+
+    @Override
+    public UserResponseDto getEmployee(Long id) {
+        return userResponseMapper.toResponse(userServicePort.getEmployee(id));
+    }
+
+    @Override
+    public UserResponseDto getClient(Long id) {
+        return userResponseMapper.toResponse(userServicePort.getClient(id));
+    }
+
+    @Override
+    public UserResponseDto getUser(Long id) {
+        return userResponseMapper.toResponse(userServicePort.getUser(id));
     }
 }
