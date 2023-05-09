@@ -35,15 +35,16 @@ public class JwtProvider {
 
     public String generateToken(Authentication authentication) {
         PrincipalUser usuarioPrincipal = (PrincipalUser) authentication.getPrincipal();
-        List<String> roles = usuarioPrincipal.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+        String roleName = usuarioPrincipal.getAuthorities().iterator().next().getAuthority();
         return Jwts.builder()
                 .setSubject(usuarioPrincipal.getUsername())
-                .claim("roles", roles)
+                .claim("role", roleName)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + expiration * 180))
                 .signWith(SignatureAlgorithm.HS256, secret.getBytes())
                 .compact();
     }
+
 
     public String getNombreUsuarioFromToken(String token) {
         return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody().getSubject();
@@ -74,12 +75,11 @@ public class JwtProvider {
             JWT jwt = JWTParser.parse(jwtResponseDto.getToken());
             JWTClaimsSet claims = jwt.getJWTClaimsSet();
             String nombreUsuario = claims.getSubject();
-            List<String> roles = claims.getStringListClaim("roles");
-            //List<String> roles = (List<String>) claims.getClaim("roles");
+            String roleName = (String) claims.getClaim("roles");
 
             return Jwts.builder()
                     .setSubject(nombreUsuario)
-                    .claim("roles", roles)
+                    .claim("roles", roleName)
                     .setIssuedAt(new Date())
                     .setExpiration(new Date(new Date().getTime() + expiration))
                     .signWith(SignatureAlgorithm.HS256, secret.getBytes())
