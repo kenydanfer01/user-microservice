@@ -24,7 +24,7 @@ VALUES
     '74',
     '+51949469604',
     '2000-01-19',
-    'keny@gmail.com',
+    'kenychumacero19@gmail.com',
     '$2a$10$GlsGSNhkbVon6ZOSNMptOu5RikedRzlCAhMa7YpwvUSS0c88WT99S',
     NULL,
     '1'
