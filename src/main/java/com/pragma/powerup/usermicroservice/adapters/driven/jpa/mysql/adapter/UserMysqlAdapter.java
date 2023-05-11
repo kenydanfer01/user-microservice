@@ -5,6 +5,7 @@ import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.repositorie
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity.UserEntity;
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.mappers.IUserEntityMapper;
 import com.pragma.powerup.usermicroservice.domain.model.User;
+import com.pragma.powerup.usermicroservice.domain.services.IAgeValidationService;
 import com.pragma.powerup.usermicroservice.domain.spi.IUserPersistencePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -22,12 +23,16 @@ public class UserMysqlAdapter implements IUserPersistencePort {
     private final IUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final IUserEntityMapper userEntityMapper;
+    private final IAgeValidationService ageValidationService;
 
 
     @Override
     public void saveUser(User user) {
         if (userRepository.findByDni(user.getDni()).isPresent()){
             throw new UserAlreadyExistsException();
+        }
+        if (!ageValidationService.isAdult(user.getBirthday())){
+            throw new UnderageUserException();
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
