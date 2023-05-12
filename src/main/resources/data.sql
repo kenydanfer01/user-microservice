@@ -1,7 +1,7 @@
 INSERT INTO `role` (`id`, `description`, `name`) VALUES ('1', 'ROLE_ADMIN', 'ROLE_ADMIN');
 INSERT INTO `role` (`id`, `description`, `name`) VALUES ('2', 'ROLE_OWNER', 'ROLE_OWNER');
-INSERT INTO `role` (`id`, `description`, `name`) VALUES ('1', 'ROLE_EMPLOYEE', 'ROLE_EMPLOYEE');
-INSERT INTO `role` (`id`, `description`, `name`) VALUES ('2', 'ROLE_CLIENT', 'ROLE_CLIENT');
+INSERT INTO `role` (`id`, `description`, `name`) VALUES ('3', 'ROLE_EMPLOYEE', 'ROLE_EMPLOYEE');
+INSERT INTO `role` (`id`, `description`, `name`) VALUES ('4', 'ROLE_CLIENT', 'ROLE_CLIENT');
 
 
 INSERT INTO `user` (
@@ -21,7 +21,7 @@ VALUES
     '1',
     'Keny',
     'Chumacero',
-    '74',
+    '24682468',
     '+51949469604',
     '2000-01-19',
     'kenychumacero19@gmail.com',

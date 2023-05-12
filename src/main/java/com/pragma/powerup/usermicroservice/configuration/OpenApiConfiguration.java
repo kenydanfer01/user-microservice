@@ -26,7 +26,7 @@ public class OpenApiConfiguration {
         return new OpenAPI()
                 .info(new Info()
                         .title(Constants.SWAGGER_TITLE_MESSAGE)
-                        .description(Constants.SWAGGER_DESCRIPTION_MESSAGE)
+                        .description(Constants.SWAGGER_DESCRIPTION_MESSAGE + " - Developed by:  " + Constants.SWAGGER_DESCRIPTION_DEVELOPER)
                         .version(Constants.SWAGGER_VERSION_MESSAGE)
                         .license(new License().name(Constants.SWAGGER_LICENSE_NAME_MESSAGE).url(Constants.SWAGGER_LICENSE_URL_MESSAGE))
                         .termsOfService(Constants.SWAGGER_TERMS_OF_SERVICE_MESSAGE))
