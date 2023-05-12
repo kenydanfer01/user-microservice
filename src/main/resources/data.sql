@@ -21,7 +21,7 @@ VALUES
     '1',
     'Keny',
     'Chumacero',
-    '24682468',
+    '74707470',
     '+51949469604',
     '2000-01-19',
     'kenychumacero19@gmail.com',
