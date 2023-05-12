@@ -8,7 +8,6 @@ import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.repositorie
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.repositories.IUserRepository;
 import com.pragma.powerup.usermicroservice.domain.api.IRoleServicePort;
 import com.pragma.powerup.usermicroservice.domain.api.IUserServicePort;
-import com.pragma.powerup.usermicroservice.domain.services.IAgeValidationService;
 import com.pragma.powerup.usermicroservice.domain.spi.IRolePersistencePort;
 import com.pragma.powerup.usermicroservice.domain.spi.IUserPersistencePort;
 import com.pragma.powerup.usermicroservice.domain.usecase.RoleUseCase;
@@ -26,7 +25,6 @@ public class BeanConfiguration {
     private final IRoleEntityMapper roleEntityMapper;
     private final IUserEntityMapper userEntityMapper;
     private final PasswordEncoder passwordEncoder;
-    private final IAgeValidationService ageValidationService;
 
     @Bean
     public IRoleServicePort roleServicePort() {
@@ -46,7 +44,7 @@ public class BeanConfiguration {
 
     @Bean
     public IUserPersistencePort userPersistencePort() {
-        return new UserMysqlAdapter(userRepository, passwordEncoder, userEntityMapper, ageValidationService);
+        return new UserMysqlAdapter(userRepository, passwordEncoder, userEntityMapper);
     }
 
 }

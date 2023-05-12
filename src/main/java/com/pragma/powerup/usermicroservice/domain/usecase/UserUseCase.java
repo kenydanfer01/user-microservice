@@ -1,8 +1,10 @@
 package com.pragma.powerup.usermicroservice.domain.usecase;
 
 import com.pragma.powerup.usermicroservice.domain.api.IUserServicePort;
+import com.pragma.powerup.usermicroservice.domain.exceptions.UnderageUserException;
 import com.pragma.powerup.usermicroservice.domain.model.User;
 import com.pragma.powerup.usermicroservice.domain.spi.IUserPersistencePort;
+import com.pragma.powerup.usermicroservice.domain.validations.AgeValidation;
 
 import java.util.List;
 
@@ -16,6 +18,9 @@ public class UserUseCase implements IUserServicePort {
 
     @Override
     public void saveUser(User user) {
+        if (!AgeValidation.isAdult(user.getBirthday())){
+            throw new UnderageUserException();
+        }
         userPersistencePort.saveUser(user);
     }
 
