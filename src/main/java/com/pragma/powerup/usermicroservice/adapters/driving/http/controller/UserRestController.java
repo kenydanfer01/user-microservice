@@ -30,22 +30,6 @@ import java.util.Map;
 public class UserRestController {
     private final IUserHandler userHandler;
 
-    @Operation(summary = "Add a new user",
-            responses = {
-                    @ApiResponse(responseCode = "201", description = "User created",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-                    @ApiResponse(responseCode = "409", description = "User already exists",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error"))),
-                    @ApiResponse(responseCode = "403", description = "Role not allowed for user creation",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @PostMapping("")
-    public ResponseEntity<Map<String, String>> saveUser(@RequestBody UserRequestDto userRequestDto) {
-        userHandler.saveUser(userRequestDto);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_CREATED_MESSAGE));
-    }
-
-
     @Operation(summary = "Delete an user",
             responses = {
                     @ApiResponse(responseCode = "200", description = "User deleted",
@@ -56,29 +40,5 @@ public class UserRestController {
     public ResponseEntity<Map<String, String>> deleteUser(@RequestBody UserRequestDto userRequestDto) {
         userHandler.deleteUser(userRequestDto);
         return ResponseEntity.ok(Collections.singletonMap(Constants.RESPONSE_MESSAGE_KEY, Constants.USER_DELETED_MESSAGE));
-    }
-
-
-    @Operation(summary = "Get a employee user",
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "Employee user returned",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
-                    @ApiResponse(responseCode = "404", description = "User not found with employee role",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("/employee/{id}")
-    public ResponseEntity<UserResponseDto> getEmployee(@PathVariable Long id) {
-        return ResponseEntity.ok(userHandler.getEmployee(id));
-    }
-
-
-    @Operation(summary = "Get a client user",
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "Client user returned",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
-                    @ApiResponse(responseCode = "404", description = "User not found with client role",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("/client/{id}")
-    public ResponseEntity<UserResponseDto> getClient(@PathVariable Long id) {
-        return ResponseEntity.ok(userHandler.getClient(id));
     }
 }

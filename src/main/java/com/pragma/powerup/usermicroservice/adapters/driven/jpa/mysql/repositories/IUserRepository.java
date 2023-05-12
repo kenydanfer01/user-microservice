@@ -13,12 +13,16 @@ public interface IUserRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<UserEntity> findByDni(String dni);
 
+    Optional<UserEntity> findByMail(String dni);
+
     Optional<UserEntity> findByIdAndRoleEntityId(Long id, Long idRole);
+
+    List<UserEntity> findAllByRoleEntityId(Long idRole, Pageable pageable);
 
     Boolean existsByDni (String dni);
 
-    void deleteById(Long id);
+    Boolean existsByMail (String dni);
 
-    List<UserEntity> findAllByRoleEntityId(Long idRole, Pageable pageable);
+    void deleteById(Long id);
 
 }

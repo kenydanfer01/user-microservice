@@ -1,6 +1,6 @@
 package com.pragma.powerup.usermicroservice.domain.usecase;
 
-import com.pragma.powerup.usermicroservice.domain.exceptions.UnderageUserException;
+import com.pragma.powerup.usermicroservice.domain.exceptions.UserIsMinorException;
 import com.pragma.powerup.usermicroservice.domain.exceptions.UserIsNullException;
 import com.pragma.powerup.usermicroservice.domain.model.User;
 import com.pragma.powerup.usermicroservice.domain.spi.IUserPersistencePort;
@@ -39,7 +39,7 @@ class UserUseCaseTest {
             User underageUser = new User();
             underageUser.setBirthday(LocalDate.now().minusYears(10)); // 10 years old
 
-            assertThrows(UnderageUserException.class, () -> userUseCase.saveUser(underageUser));
+            assertThrows(UserIsMinorException.class, () -> userUseCase.saveUser(underageUser));
         }
 
         @Test
@@ -61,21 +61,14 @@ class UserUseCaseTest {
             verify(userPersistencePort, times(1)).deleteUser(user);
         }
 
-        @Test
-        public void getAllOwners_shouldCallGetAllOwnersOnPersistencePort() {
-            int page = 0;
-            User owner1 = new User();
-            User owner2 = new User();
-            List<User> owners = Arrays.asList(owner1, owner2);
-
-            when(userPersistencePort.getAllOwners(page)).thenReturn(owners);
-
-            List<User> result = userUseCase.getAllOwners(page);
-
-            assertEquals(owners, result);
-            verify(userPersistencePort, times(1)).getAllOwners(page);
-        }
-
-        // Similar tests would be written for the other methods
+    @Test
+    public void getUser_shouldReturnUser_whenIdIsValid() {
+        User user = new User();
+        user.setId(1L);
+        when(userPersistencePort.getUser(1L)).thenReturn(user);
+        User result = userUseCase.getUser(1L);
+        assertEquals(user, result);
+        verify(userPersistencePort).getUser(1L);
+    }
 
 }

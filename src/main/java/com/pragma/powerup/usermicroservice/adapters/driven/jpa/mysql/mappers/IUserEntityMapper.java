@@ -20,4 +20,5 @@ public interface IUserEntityMapper {
     @Mapping(target = "role.id", source = "roleEntity.id")
     User toUser(UserEntity userEntity);
     List<User> toUserList(List<UserEntity> userEntityList);
+
 }

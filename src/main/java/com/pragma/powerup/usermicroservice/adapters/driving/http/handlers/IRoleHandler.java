@@ -5,5 +5,7 @@ import com.pragma.powerup.usermicroservice.adapters.driving.http.dto.response.Ro
 import java.util.List;
 
 public interface IRoleHandler {
+
     List<RoleResponseDto> getAllRoles();
+
 }

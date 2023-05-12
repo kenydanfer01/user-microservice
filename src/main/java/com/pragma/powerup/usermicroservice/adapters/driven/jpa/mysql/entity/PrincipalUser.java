@@ -12,18 +12,18 @@ public class PrincipalUser implements UserDetails {
     private String nombreUsuario;
     private String name;
     private String surname;
-    private String mail;
+    private String dni;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
     public PrincipalUser(
-            String dni, String name, String surname, String mail,
+            String mail, String name, String surname, String dni,
             String password, Collection<? extends GrantedAuthority> authorities
     ) {
-        this.nombreUsuario = dni;
+        this.nombreUsuario = mail;
         this.name = name;
         this.surname = surname;
-        this.mail = mail;
+        this.dni = dni;
         this.password = password;
         this.authorities = authorities;
     }
@@ -32,8 +32,8 @@ public class PrincipalUser implements UserDetails {
         List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(role.getName()));
 
         return new PrincipalUser(
-                usuario.getDni(), usuario.getName(), usuario.getSurname(),
-                usuario.getMail(), usuario.getPassword() ,authorities
+                usuario.getMail(), usuario.getName(), usuario.getSurname(),
+                usuario.getDni(), usuario.getPassword() ,authorities
         );
     }
 
@@ -81,7 +81,7 @@ public class PrincipalUser implements UserDetails {
         return surname;
     }
 
-    public String getMail() {
-        return mail;
+    public String getDni() {
+        return dni;
     }
 }

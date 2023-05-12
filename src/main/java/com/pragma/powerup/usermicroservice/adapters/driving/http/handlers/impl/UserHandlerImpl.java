@@ -19,7 +19,6 @@ public class UserHandlerImpl implements IUserHandler {
     private final IUserRequestMapper userRequestMapper;
     private final IUserResponseMapper userResponseMapper;
 
-
     @Override
     public void saveUser(UserRequestDto userRequestDto) {
         userServicePort.saveUser(userRequestMapper.toUser(userRequestDto));
@@ -28,36 +27,6 @@ public class UserHandlerImpl implements IUserHandler {
     @Override
     public void deleteUser(UserRequestDto userRequestDto) {
         userServicePort.deleteUser(userRequestMapper.toUser(userRequestDto));
-    }
-
-    @Override
-    public List<UserResponseDto> getAllOwners(Integer page) {
-        return userResponseMapper.toResponseList(userServicePort.getAllOwners(page));
-    }
-
-    @Override
-    public List<UserResponseDto> getAllEmployees(int page) {
-        return userResponseMapper.toResponseList(userServicePort.getAllEmployees(page));
-    }
-
-    @Override
-    public List<UserResponseDto> getAllClients(int page) {
-        return userResponseMapper.toResponseList(userServicePort.getAllClients(page));
-    }
-
-    @Override
-    public UserResponseDto getOwner(Long id) {
-        return userResponseMapper.toResponse(userServicePort.getOwner(id));
-    }
-
-    @Override
-    public UserResponseDto getEmployee(Long id) {
-        return userResponseMapper.toResponse(userServicePort.getEmployee(id));
-    }
-
-    @Override
-    public UserResponseDto getClient(Long id) {
-        return userResponseMapper.toResponse(userServicePort.getClient(id));
     }
 
     @Override

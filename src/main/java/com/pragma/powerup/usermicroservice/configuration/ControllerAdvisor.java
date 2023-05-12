@@ -1,7 +1,7 @@
 package com.pragma.powerup.usermicroservice.configuration;
 
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.exceptions.*;
-import com.pragma.powerup.usermicroservice.domain.exceptions.UnderageUserException;
+import com.pragma.powerup.usermicroservice.domain.exceptions.UserIsMinorException;
 import com.pragma.powerup.usermicroservice.domain.exceptions.UserIsNullException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,13 +48,6 @@ public class ControllerAdvisor {
                 .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, NO_DATA_FOUND_MESSAGE));
     }
 
-    @ExceptionHandler(PersonAlreadyExistsException.class)
-    public ResponseEntity<Map<String, String>> handlePersonAlreadyExistsException(
-            PersonAlreadyExistsException personAlreadyExistsException) {
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, PERSON_ALREADY_EXISTS_MESSAGE));
-    }
-
     @ExceptionHandler(MailAlreadyExistsException.class)
     public ResponseEntity<Map<String, String>> handleMailAlreadyExistsException(
             MailAlreadyExistsException mailAlreadyExistsException) {
@@ -62,11 +55,11 @@ public class ControllerAdvisor {
                 .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, MAIL_ALREADY_EXISTS_MESSAGE));
     }
 
-    @ExceptionHandler(PersonNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handlePersonNotFoundException(
-            PersonNotFoundException personNotFoundException) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, PERSON_NOT_FOUND_MESSAGE));
+    @ExceptionHandler(DniAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleDniAlreadyExistsException(
+            DniAlreadyExistsException dniAlreadyExistsException) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, DNI_ALREADY_EXISTS_MESSAGE));
     }
 
     @ExceptionHandler(RoleNotAllowedForCreationException.class)
@@ -97,11 +90,11 @@ public class ControllerAdvisor {
                 .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, ROLE_NOT_FOUND_MESSAGE));
     }
 
-    @ExceptionHandler(UnderageUserException.class)
+    @ExceptionHandler(UserIsMinorException.class)
     public ResponseEntity<Map<String, String>> underageUserException(
-            UnderageUserException underageUserException) {
+            UserIsMinorException underageUserException) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, UNDERAGE_USER_EXCEPTION_MESSAGE));
+                .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, USER_IS_A_MINOR_MESSAGE));
     }
 
     @ExceptionHandler(UserIsNullException.class)
