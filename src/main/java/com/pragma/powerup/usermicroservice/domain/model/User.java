@@ -13,6 +13,9 @@ public class User {
     private String password;
     private Role role;
 
+    public User() {
+    }
+
     public User(Long id, String name, String surname, String dni, String phone, LocalDate birthday, String mail, String password, Role role) {
         this.id = id;
         this.name = name;

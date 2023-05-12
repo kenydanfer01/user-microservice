@@ -30,6 +30,7 @@ public class Constants {
     public static final String ROLE_NOT_ALLOWED_MESSAGE = "No permission granted to create users with this role";
     public static final String USER_ALREADY_EXISTS_MESSAGE = "A user already exists with the role provided";
     public static final String USER_NOT_FOUND_MESSAGE = "No user found with the role provided";
+    public static final String USER_IS_NULL_MESSAGE = "User is Null";
 
     // SWAGGER
     public static final String SWAGGER_TITLE_MESSAGE = "User Microservice API - Pragma Power Up";

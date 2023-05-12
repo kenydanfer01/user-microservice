@@ -2,6 +2,7 @@ package com.pragma.powerup.usermicroservice.configuration;
 
 import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.exceptions.*;
 import com.pragma.powerup.usermicroservice.domain.exceptions.UnderageUserException;
+import com.pragma.powerup.usermicroservice.domain.exceptions.UserIsNullException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
@@ -99,7 +100,14 @@ public class ControllerAdvisor {
     @ExceptionHandler(UnderageUserException.class)
     public ResponseEntity<Map<String, String>> underageUserException(
             UnderageUserException underageUserException) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, UNDERAGE_USER_EXCEPTION_MESSAGE));
+    }
+
+    @ExceptionHandler(UserIsNullException.class)
+    public ResponseEntity<Map<String, String>> userIsNullException(
+            UserIsNullException userIsNullException) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, USER_IS_NULL_MESSAGE));
     }
 }
